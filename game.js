@@ -16,11 +16,14 @@ var reader = readline.createInterface({
 });
 
 Game.prototype.promptUser = function() {
-  reader.question('')
+  reader.question('Where would you like to place your mark (in the format: row, column)?',
+    function(userInput) {
+      console.log('userInput', userInput);
+    });
 }
 
 Game.prototype.play = function() {
-  Game.promptUser();
+  this.promptUser();
 };
 
 // Game.prototype.turn = function() {
@@ -38,5 +41,4 @@ Game.prototype.move = function(row, col) {
 };
 
 var tictac = new Game();
-
-console.log(tictac.start());
+tictac.play();
