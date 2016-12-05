@@ -15,10 +15,22 @@ var reader = readline.createInterface({
   output: process.stdout
 });
 
+Game.prototype.move = function(row, col) {
+  console.log('in move', row, col);
+  this.board[row - 1][col - 1] = 'X';
+  console.log('board', this.board);
+};
+
 Game.prototype.promptUser = function() {
-  reader.question('Where would you like to place your mark (in the format: row, column)?',
+  var row,
+      col,
+      context = this;
+  reader.question('Place your mark as: row, column?',
     function(userInput) {
-      console.log('userInput', userInput);
+      userInput = userInput.split(',');
+      row = userInput[0];
+      col = userInput[1];
+      context.move(row, col);
     });
 }
 
@@ -35,10 +47,6 @@ Game.prototype.play = function() {
 //     this.player1 = !this.player1;
 //   }
 // };
-
-Game.prototype.move = function(row, col) {
-
-};
 
 var tictac = new Game();
 tictac.play();
